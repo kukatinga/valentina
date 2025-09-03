@@ -4,264 +4,939 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Valentina – Luxury GFE Companion</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    body {
-      font-family: 'Playfair Display', serif;
-      background-color: #111;
-      color: #f5f5f5;
+    :root {
+      --gold: #d4af37;
+      --dark-gold: #b8941f;
+      --black: #0a0a0a;
+      --dark-gray: #1a1a1a;
+      --medium-gray: #2a2a2a;
+      --light-gray: #7e7e7e;
+      --white: #f5f5f5;
+      --overlay: rgba(0, 0, 0, 0.7);
+    }
+    
+    * {
       margin: 0;
       padding: 0;
-      line-height: 1.7;
+      box-sizing: border-box;
     }
-
-    /* Hero Banner */
+    
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: var(--black);
+      color: var(--white);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+    
+    h1, h2, h3, h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    /* Header & Navigation */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      background: rgba(10, 10, 10, 0.9);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+      padding: 15px 0;
+      transition: all 0.4s ease;
+    }
+    
+    header.scrolled {
+      padding: 10px 0;
+    }
+    
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    .logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      color: var(--gold);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+    }
+    
+    .logo span {
+      color: var(--white);
+    }
+    
+    .nav-links {
+      display: flex;
+      list-style: none;
+    }
+    
+    .nav-links li {
+      margin-left: 30px;
+    }
+    
+    .nav-links a {
+      color: var(--white);
+      text-decoration: none;
+      font-size: 15px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    
+    .nav-links a:after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--gold);
+      transition: width 0.3s ease;
+    }
+    
+    .nav-links a:hover {
+      color: var(--gold);
+    }
+    
+    .nav-links a:hover:after {
+      width: 100%;
+    }
+    
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--white);
+      font-size: 24px;
+      cursor: pointer;
+    }
+    
+    /* Hero Section */
     .hero {
-      background: url('hero-image.jpg') no-repeat center center/cover;
-      height: 60vh;
+      background: linear-gradient(var(--overlay), var(--overlay)), url('hero-image.jpg') no-repeat center center/cover;
+      height: 100vh;
+      min-height: 700px;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
-      color: #fff;
+      color: var(--white);
       position: relative;
+      padding-top: 80px;
     }
-    .hero::after {
+    
+    .hero-content {
+      max-width: 800px;
+      padding: 0 20px;
+      z-index: 2;
+      animation: fadeIn 1.5s ease;
+    }
+    
+    .hero h1 {
+      font-size: 4.5rem;
+      margin-bottom: 20px;
+      line-height: 1.2;
+      letter-spacing: 2px;
+    }
+    
+    .hero p {
+      font-size: 1.5rem;
+      margin-bottom: 30px;
+      font-weight: 300;
+      letter-spacing: 1px;
+    }
+    
+    .gold-text {
+      color: var(--gold);
+      font-weight: 700;
+    }
+    
+    .divider {
+      width: 100px;
+      height: 2px;
+      background: var(--gold);
+      margin: 25px auto;
+    }
+    
+    .scroll-indicator {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: var(--white);
+      font-size: 14px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      animation: bounce 2s infinite;
+    }
+    
+    .scroll-indicator i {
+      margin-right: 8px;
+      color: var(--gold);
+    }
+    
+    /* Main Content Sections */
+    .section {
+      padding: 100px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .section-title {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    
+    .section-title h2 {
+      font-size: 2.8rem;
+      color: var(--gold);
+      position: relative;
+      display: inline-block;
+      margin-bottom: 20px;
+    }
+    
+    .section-title h2:after {
       content: '';
       position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.5);
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 2px;
+      background: var(--gold);
     }
-    .hero-content {
-      position: relative;
-      z-index: 2;
-    }
-    .hero h1 {
-      font-size: 3em;
-      color: #d4af37;
-      margin: 0;
-    }
-    .hero p {
-      font-size: 1.3em;
-      margin-top: 10px;
-    }
-
-    /* Main Container */
-    .profile-container {
-      max-width: 1000px;
+    
+    .section-title p {
+      color: var(--light-gray);
+      max-width: 600px;
       margin: 0 auto;
-      padding: 40px 20px;
     }
-
-    h2 {
-      color: #d4af37;
-      text-transform: uppercase;
-      margin-bottom: 15px;
-      border-bottom: 1px solid #d4af37;
-      padding-bottom: 5px;
+    
+    /* Profile Section */
+    .profile {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
     }
-
-    .section {
-      margin-bottom: 50px;
+    
+    .profile-image {
+      flex: 1;
+      min-width: 300px;
+      padding: 20px;
+      position: relative;
     }
-
+    
+    .profile-image img {
+      width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      transition: all 0.4s ease;
+    }
+    
+    .profile-image:hover img {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+    }
+    
+    .profile-details {
+      flex: 1;
+      min-width: 300px;
+      padding: 20px;
+    }
+    
     .info-list {
       list-style: none;
-      padding: 0;
-      margin: 0;
+      margin: 30px 0;
     }
+    
     .info-list li {
-      padding: 5px 0;
-      font-size: 1.1em;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      display: flex;
     }
+    
+    .info-list li:last-child {
+      border-bottom: none;
+    }
+    
     .highlight {
-      color: #d4af37;
-      font-weight: bold;
+      color: var(--gold);
+      font-weight: 500;
+      min-width: 120px;
+      display: inline-block;
     }
-
-    /* Profile Photo */
-    .profile-photo {
+    
+    /* About Section */
+    .about-content {
+      max-width: 800px;
+      margin: 0 auto;
       text-align: center;
-      margin-bottom: 40px;
     }
-    .profile-photo img {
-      width: 220px;
-      height: 220px;
-      object-fit: cover;
-      border-radius: 50%;
-      border: 4px solid #d4af37;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+    
+    .about-content p {
+      margin-bottom: 25px;
+      font-size: 1.1rem;
     }
-
-    /* Gallery */
-    .gallery {
+    
+    /* Look & Personality Sections */
+    .features {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 15px;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 40px;
+      margin-top: 50px;
     }
-    .gallery img {
-      width: 100%;
-      height: 320px;
-      object-fit: cover;
+    
+    .feature-box {
+      background: var(--dark-gray);
+      padding: 40px 30px;
       border-radius: 10px;
-      transition: transform 0.3s ease;
-      border: 2px solid #333;
+      text-align: center;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(212, 175, 55, 0.1);
     }
-    .gallery img:hover {
-      transform: scale(1.05);
-      border-color: #d4af37;
+    
+    .feature-box:hover {
+      transform: translateY(-10px);
+      border-color: var(--gold);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     }
-
-    /* Rates Table */
+    
+    .feature-icon {
+      font-size: 2.5rem;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+    
+    .feature-box h3 {
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+    }
+    
+    /* Gallery Section */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+      margin-top: 50px;
+    }
+    
+    .gallery-item {
+      position: relative;
+      border-radius: 10px;
+      overflow: hidden;
+      height: 350px;
+      cursor: pointer;
+    }
+    
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: all 0.5s ease;
+    }
+    
+    .gallery-item:hover img {
+      transform: scale(1.1);
+    }
+    
+    .gallery-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(transparent, var(--overlay));
+      padding: 30px 20px 20px;
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+    
+    .gallery-item:hover .gallery-overlay {
+      opacity: 1;
+    }
+    
+    /* Rates Section */
+    .rates-container {
+      max-width: 800px;
+      margin: 50px auto 0;
+    }
+    
     .rates-table {
       width: 100%;
       border-collapse: collapse;
+      margin-top: 30px;
+      background: var(--dark-gray);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    
+    .rates-table th, .rates-table td {
+      padding: 20px;
+      text-align: left;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    .rates-table th {
+      background-color: var(--medium-gray);
+      color: var(--gold);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 14px;
+    }
+    
+    .rates-table tr:last-child td {
+      border-bottom: none;
+    }
+    
+    .rates-table tr {
+      transition: all 0.3s ease;
+    }
+    
+    .rates-table tr:hover {
+      background: rgba(212, 175, 55, 0.05);
+    }
+    
+    /* Contact Section */
+    .contact-container {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    
+    .contact-box {
+      padding: 50px;
+      border: 1px solid var(--gold);
+      border-radius: 10px;
+      background: var(--dark-gray);
+      margin-top: 50px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .contact-box:before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
+      transform: rotate(45deg);
+      z-index: 0;
+    }
+    
+    .contact-content {
+      position: relative;
+      z-index: 2;
+    }
+    
+    .contact-icon {
+      font-size: 2.5rem;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+    
+    .contact-box h3 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+    
+    .contact-box p {
+      margin-bottom: 25px;
+      font-size: 1.1rem;
+    }
+    
+    .contact-email {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--black);
+      padding: 15px 30px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 500;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
       margin-top: 15px;
     }
-    .rates-table th, .rates-table td {
-      padding: 10px;
-      border: 1px solid #444;
-      text-align: left;
+    
+    .contact-email:hover {
+      background: var(--dark-gold);
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
     }
-    .rates-table th {
-      background-color: #222;
-      color: #d4af37;
-      text-transform: uppercase;
-    }
-
-    /* Contact Box */
-    .contact-box {
-      padding: 20px;
-      border: 1px solid #d4af37;
+    
+    /* Footer */
+    footer {
+      background: var(--dark-gray);
+      padding: 60px 0 30px;
       text-align: center;
-      font-size: 1.1em;
-      background-color: #1a1a1a;
     }
-    .contact-box a {
-      color: #d4af37;
+    
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.5rem;
+      color: var(--gold);
+      margin-bottom: 20px;
+      display: inline-block;
+    }
+    
+    .footer-links {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      margin: 30px 0;
+      flex-wrap: wrap;
+    }
+    
+    .footer-links li {
+      margin: 0 15px;
+    }
+    
+    .footer-links a {
+      color: var(--light-gray);
       text-decoration: none;
-      font-weight: bold;
+      transition: all 0.3s ease;
     }
-
-    @media (max-width: 768px) {
+    
+    .footer-links a:hover {
+      color: var(--gold);
+    }
+    
+    .copyright {
+      color: var(--light-gray);
+      font-size: 0.9rem;
+      margin-top: 30px;
+    }
+    
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
+      40% { transform: translateY(-20px) translateX(-50%); }
+      60% { transform: translateY(-10px) translateX(-50%); }
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 992px) {
       .hero h1 {
-        font-size: 2.2em;
+        font-size: 3.5rem;
       }
+      
+      .nav-links {
+        display: none;
+      }
+      
+      .mobile-menu-btn {
+        display: block;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .hero {
+        height: 80vh;
+        min-height: 600px;
+      }
+      
+      .hero h1 {
+        font-size: 2.8rem;
+      }
+      
       .hero p {
-        font-size: 1.1em;
+        font-size: 1.2rem;
+      }
+      
+      .section {
+        padding: 70px 0;
+      }
+      
+      .section-title h2 {
+        font-size: 2.2rem;
+      }
+      
+      .profile-image, .profile-details {
+        flex: 100%;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+      
+      .contact-box {
+        padding: 30px 20px;
+      }
+      
+      .gallery-item {
+        height: 280px;
       }
     }
   </style>
 </head>
 <body>
+  <!-- Header -->
+  <header id="header">
+    <div class="header-container">
+      <a href="#" class="logo">Valentina<span>.</span></a>
+      
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#look">My Look</a></li>
+        <li><a href="#personality">Personality</a></li>
+        <li><a href="#experiences">Experiences</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#rates">Rates</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      
+      <button class="mobile-menu-btn">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </header>
 
-  <!-- Hero Banner -->
-  <div class="hero">
+  <!-- Hero Section -->
+  <section class="hero">
     <div class="hero-content">
-      <h1>Valentina – Luxury Girlfriend Experience</h1>
+      <h1>Valentina <span class="gold-text">– Luxury Companion</span></h1>
+      <div class="divider"></div>
       <p>Refined. Elegant. Discreet.</p>
     </div>
-  </div>
-
-  <!-- Main Content -->
-  <div class="profile-container">
-
-    <!-- Profile Photo -->
-    <div class="profile-photo">
-      <img src="profile-photo.jpg" alt="Valentina">
+    
+    <div class="scroll-indicator">
+      <i class="fas fa-chevron-down"></i> Scroll to Discover
     </div>
+  </section>
 
-    <!-- Details -->
-    <div class="section">
-      <h2>Details</h2>
-      <ul class="info-list">
-        <li><span class="highlight">Name:</span> Valentina (Stage Name)</li>
-        <li><span class="highlight">Age:</span> 28</li>
-        <li><span class="highlight">Location:</span> Nairobi | Available Worldwide by Arrangement</li>
-        <li><span class="highlight">Languages:</span> English, Swahili, Basic French</li>
-        <li><span class="highlight">Availability:</span> By Exclusive Appointment Only</li>
-      </ul>
-    </div>
-
-    <!-- About Me -->
-    <div class="section">
-      <h2>About Me</h2>
-      <p>
-        Welcome, gentlemen of distinction. I’m <strong>Valentina</strong>, a refined and captivating companion who embodies elegance, warmth, and sophistication. 
-        With me, you’ll experience more than just companionship — you’ll enjoy a true <strong>Girlfriend Experience</strong>, where chemistry, laughter, 
-        and deep conversation flow as effortlessly as fine wine.
-      </p>
-      <p>
-        I am well-educated, widely traveled, and take pride in offering a discreet and bespoke experience that feels both natural and intoxicating. 
-        Whether you seek a serene evening of intimacy, a radiant dinner date, or an unforgettable weekend escape, I am here to create a world where 
-        time slows down and indulgence is effortless.
-      </p>
-    </div>
-
-    <!-- My Look -->
-    <div class="section">
-      <h2>My Look</h2>
-      <ul class="info-list">
-        <li><span class="highlight">Height:</span> 5'7" (170 cm)</li>
-        <li><span class="highlight">Figure:</span> Elegant, toned hourglass silhouette</li>
-        <li><span class="highlight">Hair:</span> Glossy chestnut waves</li>
-        <li><span class="highlight">Eyes:</span> Captivating green</li>
-        <li><span class="highlight">Style:</span> Effortlessly glamorous — designer dresses, heels, and timeless elegance</li>
-      </ul>
-    </div>
-
-    <!-- Personality -->
-    <div class="section">
-      <h2>Personality</h2>
-      <p>
-        Think of me as your sophisticated confidante: graceful yet approachable, charming yet authentic. 
-        I adore fine dining, art galleries, boutique travel, and meaningful connections. 
-        My warmth and poise create an atmosphere where you can truly relax and feel seen.
-      </p>
-    </div>
-
-    <!-- Signature Experiences -->
-    <div class="section">
-      <h2>Signature Experiences</h2>
-      <ul class="info-list">
-        <li>Luxury Girlfriend Experience (GFE)</li>
-        <li>Fine Dining & Gala Event Companionship</li>
-        <li>Overnight Stays in 5★ Hotels</li>
-        <li>Private Weekend Getaways & Travel</li>
-        <li>Discreet, VIP-Only Encounters</li>
-      </ul>
-    </div>
-
-    <!-- Gallery -->
-    <div class="section">
-      <h2>Gallery</h2>
-      <div class="gallery">
-        <img src="gallery1.jpg" alt="Gallery Image 1">
-        <img src="gallery2.jpg" alt="Gallery Image 2">
-        <img src="gallery3.jpg" alt="Gallery Image 3">
-        <img src="gallery4.jpg" alt="Gallery Image 4">
-        <img src="gallery5.jpg" alt="Gallery Image 5">
+  <!-- Profile Section -->
+  <section class="section">
+    <div class="container">
+      <div class="profile">
+        <div class="profile-image">
+          <img src="profile-photo.jpg" alt="Valentina">
+        </div>
+        
+        <div class="profile-details">
+          <div class="section-title">
+            <h2>Details</h2>
+          </div>
+          
+          <ul class="info-list">
+            <li><span class="highlight">Name:</span> Valentina (Stage Name)</li>
+            <li><span class="highlight">Age:</span> 28</li>
+            <li><span class="highlight">Location:</span> Nairobi | Available Worldwide by Arrangement</li>
+            <li><span class="highlight">Languages:</span> English, Swahili, Basic French</li>
+            <li><span class="highlight">Availability:</span> By Exclusive Appointment Only</li>
+          </ul>
+        </div>
       </div>
     </div>
+  </section>
 
-    <!-- Rates -->
-    <div class="section">
-      <h2>Honorarium</h2>
-      <table class="rates-table">
-        <tr><th>Engagement</th><th>Rates</th></tr>
-        <tr><td>2 Hours</td><td>$$$</td></tr>
-        <tr><td>Evening Engagement (4 Hours)</td><td>$$$</td></tr>
-        <tr><td>Overnight (12 Hours)</td><td>$$$$</td></tr>
-        <tr><td>Weekend Retreat</td><td>$$$$$</td></tr>
-      </table>
+  <!-- About Section -->
+  <section id="about" class="section">
+    <div class="container">
+      <div class="section-title">
+        <h2>About Me</h2>
+        <p>Discover the woman behind the elegance</p>
+      </div>
+      
+      <div class="about-content">
+        <p>
+          Welcome, gentlemen of distinction. I'm <strong class="gold-text">Valentina</strong>, a refined and captivating companion who embodies elegance, warmth, and sophistication. 
+          With me, you'll experience more than just companionship — you'll enjoy a true <strong class="gold-text">Girlfriend Experience</strong>, where chemistry, laughter, 
+          and deep conversation flow as effortlessly as fine wine.
+        </p>
+        <p>
+          I am well-educated, widely traveled, and take pride in offering a discreet and bespoke experience that feels both natural and intoxicating. 
+          Whether you seek a serene evening of intimacy, a radiant dinner date, or an unforgettable weekend escape, I am here to create a world where 
+          time slows down and indulgence is effortless.
+        </p>
+      </div>
     </div>
+  </section>
 
-    <!-- Contact -->
-    <div class="section contact-box">
-      📩 <strong>Discreet Contact:</strong><br/>
-      Serious, respectful inquiries only. Please email with your name, desired date, and engagement details.<br/>
-      <a href="mailto:valentina@luxurycompanions.com">valentina@luxurycompanions.com</a>
+  <!-- Look Section -->
+  <section id="look" class="section">
+    <div class="container">
+      <div class="section-title">
+        <h2>My Look</h2>
+        <p>Elegance in every detail</p>
+      </div>
+      
+      <div class="features">
+        <div class="feature-box">
+          <div class="feature-icon">
+            <i class="fas fa-ruler-vertical"></i>
+          </div>
+          <h3>Height</h3>
+          <p>5'7" (170 cm)</p>
+        </div>
+        
+        <div class="feature-box">
+          <div class="feature-icon">
+            <i class="fas fa-heart"></i>
+          </div>
+          <h3>Figure</h3>
+          <p>Elegant, toned hourglass silhouette</p>
+        </div>
+        
+        <div class="feature-box">
+          <div class="feature-icon">
+            <i class="fas fa-star"></i>
+          </div>
+          <h3>Features</h3>
+          <p>Glossy chestnut waves, captivating green eyes</p>
+        </div>
+        
+        <div class="feature-box">
+          <div class="feature-icon">
+            <i class="fas fa-tshirt"></i>
+          </div>
+          <h3>Style</h3>
+          <p>Effortlessly glamorous — designer dresses, heels, and timeless elegance</p>
+        </div>
+      </div>
     </div>
+  </section>
 
-  </div>
+  <!-- Personality Section -->
+  <section id="personality" class="section">
+    <div class="container">
+      <div class="section-title">
+        <h2>Personality</h2>
+        <p>The essence of my character</p>
+      </div>
+      
+      <div class="about-content">
+        <p>
+          Think of me as your sophisticated confidante: graceful yet approachable, charming yet authentic. 
+          I adore fine dining, art galleries, boutique travel, and meaningful connections. 
+          My warmth and poise create an atmosphere where you can truly relax and feel seen.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experiences Section -->
+  <section id="experiences" class="section">
+    <div class="container">
+      <div class="section-title">
+        <h2>Signature Experiences</h2>
+        <p>Curated moments of luxury</p>
+      </div>
+      
+      <div class="features">
+        <div class="feature-box">
+          <div class="feature-icon">
+            <i class="fas fa-glass-cheers"></i>
+          </div>
+          <h3>Luxury GFE</h3>
+          <p>Authentic girlfriend experience with genuine connection</p>
+        </div>
+        
+        <div class="feature-box">
+          <div class="feature-icon">
+            <i class="fas fa-utensils"></i>
+          </div>
+          <h3>Fine Dining</h3>
+          <p>Elegant companionship for gourmet experiences</p>
+        </div>
+        
+        <div class="feature-box">
+          <div class="feature-icon">
+            <i class="fas fa-moon"></i>
+          </div>
+          <h3>Overnight Stays</h3>
+          <p>Unforgettable nights in luxury accommodations</p>
+        </div>
+        
+        <div class="feature-box">
+          <div class="feature-icon">
+            <i class="fas fa-plane"></i>
+          </div>
+          <h3>Travel Escapes</h3>
+          <p>Private weekend getaways to exotic destinations</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery Section -->
+  <section id="gallery" class="section">
+    <div class="container">
+      <div class="section-title">
+        <h2>Gallery</h2>
+        <p>A glimpse into my world</p>
+      </div>
+      
+      <div class="gallery-grid">
+        <div class="gallery-item">
+          <img src="gallery1.jpg" alt="Gallery Image 1">
+          <div class="gallery-overlay"></div>
+        </div>
+        
+        <div class="gallery-item">
+          <img src="gallery2.jpg" alt="Gallery Image 2">
+          <div class="gallery-overlay"></div>
+        </div>
+        
+        <div class="gallery-item">
+          <img src="gallery3.jpg" alt="Gallery Image 3">
+          <div class="gallery-overlay"></div>
+        </div>
+        
+        <div class="gallery-item">
+          <img src="gallery4.jpg" alt="Gallery Image 4">
+          <div class="gallery-overlay"></div>
+        </div>
+        
+        <div class="gallery-item">
+          <img src="gallery5.jpg" alt="Gallery Image 5">
+          <div class="gallery-overlay"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Rates Section -->
+  <section id="rates" class="section">
+    <div class="container">
+      <div class="section-title">
+        <h2>Honorarium</h2>
+        <p>Investment in exceptional experiences</p>
+      </div>
+      
+      <div class="rates-container">
+        <table class="rates-table">
+          <tr>
+            <th>Engagement</th>
+            <th>Rates</th>
+          </tr>
+          <tr>
+            <td>2 Hours</td>
+            <td>$$$</td>
+          </tr>
+          <tr>
+            <td>Evening Engagement (4 Hours)</td>
+            <td>$$$</td>
+          </tr>
+          <tr>
+            <td>Overnight (12 Hours)</td>
+            <td>$$$$</td>
+          </tr>
+          <tr>
+            <td>Weekend Retreat</td>
+            <td>$$$$$</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="section">
+    <div class="container">
+      <div class="section-title">
+        <h2>Contact</h2>
+        <p>Begin our conversation</p>
+      </div>
+      
+      <div class="contact-container">
+        <div class="contact-box">
+          <div class="contact-content">
+            <div class="contact-icon">
+              <i class="fas fa-envelope"></i>
+            </div>
+            <h3>Discreet Inquiries</h3>
+            <p>
+              Serious, respectful inquiries only. Please email with your name, desired date, and engagement details.
+            </p>
+            <a href="mailto:valentina@luxurycompanions.com" class="contact-email">valentina@luxurycompanions.com</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <a href="#" class="footer-logo">Valentina</a>
+      
+      <ul class="footer-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#look">My Look</a></li>
+        <li><a href="#personality">Personality</a></li>
+        <li><a href="#experiences">Experiences</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#rates">Rates</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      
+      <p class="copyright">© 2023 Valentina. All rights reserved. Discretion assured.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Header scroll effect
+    window.addEventListener('scroll', function() {
+      const header = document.getElementById('header');
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+    
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 80,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+    
+    // Mobile menu toggle
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const navLinks = document.querySelector('.nav-links');
+    
+    mobileMenuBtn.addEventListener('click', function() {
+      navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+    });
+  </script>
 </body>
 </html>
